@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServiceName": {
+      "value": "${APP_DISPLAY_NAME}-appservice"
+    },
+    "existingAppServicePlanName": {
+      "value": ""
+    },
+    "existingAppServicePlanLocation": {
+      "value": ""
+    },
+    "newAppServicePlanName": {
+      "value": "${APP_DISPLAY_NAME}-appservice-plan"
+    },
+    "newAppServicePlanLocation": {
+      "value": "${LOCATION}"
+    },
+    "newAppServicePlanSku": {
+      "value": {
+        "name": "S1",
+        "tier": "Standard",
+        "size": "S1",
+        "family": "S",
+        "capacity": 1
+      }
+    },
+    "appType": {
+      "value": "${APP_TYPE}"
+    },
+    "appId": {
+      "value": "${APP_ID}"
+    },
+    "appSecret": {
+      "value": "${CLIENT_SECRET}"
+    },
+    "UMSIName": {
+      "value": ""
+    },
+    "UMSIResourceGroupName": {
+      "value": ""
+    },
+    "tenantId": {
+      "value": "${TENANT_ID}"
+    }
+  }
+}

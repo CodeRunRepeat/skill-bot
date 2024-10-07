@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "azureBotId": {
+      "value": "${BOT_DISPLAY_NAME}"
+    },
+    "azureBotSku": {
+      "value": "F0"
+    },
+    "azureBotRegion": {
+      "value": "global"
+    },
+    "botEndpoint": {
+      "value": "https://${APP_DISPLAY_NAME}-appservice.azurewebsites.net/api/messages"
+    },
+    "appType": {
+      "value": "${APP_TYPE}"
+    },
+    "appId": {
+      "value": "${APP_ID}"
+    },
+    "UMSIName": {
+      "value": ""
+    },
+    "UMSIResourceGroupName": {
+      "value": ""
+    },
+    "tenantId": {
+      "value": "${TENANT_ID}"
+    }
+  }
+}
