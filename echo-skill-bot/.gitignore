@@ -7,6 +7,7 @@
 appsettings.json
 *.zip
 launchSettings.json
+*-manifest-1.0.json
 
 # User-specific files
 *.suo

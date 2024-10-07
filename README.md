@@ -27,10 +27,10 @@ This example demonstrates how to create a simple bot that can be called as a ski
 1. Change to the directory of the sample:
 
     ```bash
-    cd skill-bot
+    cd skill-bot/echo-skill-bot
     ```
 
-1. Review and adjust the parameters (see the [Parameters](#parameters) section) in the relevant section of setup-bot.sh
+1. Review and adjust the parameters (see the [Parameters](#parameters) section) in the relevant section of `setup-bot.sh`s.
 
 1. Run the setup script:
 

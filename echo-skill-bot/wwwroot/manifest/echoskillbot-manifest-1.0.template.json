@@ -18,7 +18,7 @@
       "name": "default",
       "protocol": "BotFrameworkV3",
       "description": "Default endpoint for the skill",
-      "endpointUrl": "http://${APP_DISPLAY_NAME}-appservice.azurewebsites.net/api/messages",
+      "endpointUrl": "http://${APP_WEBSITE_NAME}.azurewebsites.net/api/messages",
       "msAppId": "${CONSUMER_APP_ID}"
     }
   ],

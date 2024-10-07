@@ -4,9 +4,14 @@
 #az account set --subscription <<subscription>>
 #az account show
 
+# -------------------------------- Functions- --------------------------------
+warning () { 
+    echo -e "\e[93m$1\e[0m" 
+}
+
 # -------------------------------- Parameters --------------------------------
 tenant_id=$(az account show --query tenantId -o tsv)
-
+subscription_id=$(az account show --query id -o tsv)
 resource_group_name="skill-bot-rg"
 location="westeurope"
 app_type="MultiTenant" # or "SingleTenant"
@@ -14,12 +19,32 @@ app_display_name="skill-bot-sprintwave"
 bot_display_name="skill-bot-sprintwave"
 
 echo "Using the following parameters:"
+
 echo "tenant_id=$tenant_id"
+
 echo "resource_group_name=$resource_group_name"
+if [ $(az group exists --name $resource_group_name) == "true" ]; then
+    warning "Resource group $resource_group_name already exists."
+fi
+
 echo "location=$location"
 echo "app_type=$app_type"
+
 echo "app_display_name=$app_display_name"
+app_website_name=$app_display_name-appservice
+echo "app_website_name=$app_website_name"
+
+app_name_available=$(az rest --method post --uri https://management.azure.com/subscriptions/$subscription_id/providers/Microsoft.Web/checknameavailability?api-version=2023-12-01 --body "{\"name\":\"$app_website_name\",\"type\":\"Microsoft.Web/sites\"}" | jq -r '.nameAvailable')
+if [ $app_name_available != "true" ]; then
+    warning "App service $app_website_name already exists."
+fi
+
+if [ $(az ad app list --display-name $app_display_name --query 'length(@)' -o tsv) -gt 0 ]; then
+    warning "App registration $app_display_name already exists."
+fi
+
 echo "bot_display_name=$bot_display_name"
+
 echo "Do you want to continue? (y/n)"
 read continue
 if [ $continue != "Y" ] && [ $continue != "y" ]; then
@@ -30,8 +55,6 @@ fi
 # Optional -- for when the bot skill consumer is in a different tenant
 #consumer_tenant_id="f3f21bca-7b2f-40f2-a2fc-dddd9be1d6dc"
 #consumer_app_id="c01e603c-cace-41f9-a6d3-475b8220d1a0"
-
-# ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
 # Create the resource group
@@ -87,10 +110,12 @@ echo "export APP_ID=$app_id" >> .env
 echo "export CONSUMER_APP_ID=$consumer_app_id" >> .env
 echo "export APP_TYPE=$app_type" >> .env
 echo "export APP_DISPLAY_NAME=$app_display_name" >> .env
+echo "export APP_WEBSITE_NAME=$app_website_name" >> .env
 echo "export CLIENT_SECRET=$client_secret" >> .env
 echo "export BOT_ID=$bot_id" >> .env
 echo "export BOT_DISPLAY_NAME=$bot_display_name" >> .env
 echo "export TENANT_ID=$tenant_id" >> .env
+echo "export SUBSCRIPTION_ID=$subscription_id" >> .env
 echo "export schema=\\$schema" >> .env
 echo "export id=\\$id" >> .env
 
@@ -130,8 +155,8 @@ dotnet build --configuration Release --os win
 zip -r bot.zip . -x "bot.zip" -x "DeploymentTemplates/*" -x ".env" -x "*.template.*" -x ".git/*" -x ".gitignore" -x ".vscode/*" 
 
 # Deploy the bot
-echo "Deploying the bot to $app_display_name-appservice"
-az webapp deploy --name $app_display_name-appservice --resource-group $resource_group_name --src-path ./bot.zip
+echo "Deploying the bot to $app_website_name"
+az webapp deploy --name $app_website_name --resource-group $resource_group_name --src-path ./bot.zip
 
 # ----------------------------------------------------------------------------
 echo "Deployment completed"
