@@ -21,7 +21,7 @@ This example demonstrates how to create a simple bot that can be called as a ski
 1. Open Azure Cloud Shell or your local shell and clone the repository:
 
     ```bash
-    git clone xxxx.git
+    git clone https://github.com/CodeRunRepeat/skill-bot.git
     ```
 
 1. Change to the directory of the sample:
