@@ -35,6 +35,7 @@ This example demonstrates how to create a simple bot that can be called as a ski
 1. Run the setup script:
 
     ```bash
+    chmod +x setup-bot.sh
     ./setup-bot.sh
     ```
 

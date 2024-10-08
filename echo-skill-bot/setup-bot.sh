@@ -75,6 +75,10 @@ response=$(az ad app create --display-name $app_display_name --sign-in-audience 
 app_id=$(echo $response | jq -r '.appId')
 echo "App registration $app_display_name created: $app_id"
 
+# Set the app registration home page URL
+az ad app update --id $app_id --web-home-page-url "https://$app_website_name.azurewebsites.net"
+
+# Create client secret
 response=$(az ad app credential reset --id $app_id)
 client_secret=$(echo $response | jq -r '.password')
 echo "Client secret created: $client_secret"
@@ -116,8 +120,8 @@ echo "export BOT_ID=$bot_id" >> .env
 echo "export BOT_DISPLAY_NAME=$bot_display_name" >> .env
 echo "export TENANT_ID=$tenant_id" >> .env
 echo "export SUBSCRIPTION_ID=$subscription_id" >> .env
-echo "export schema=\\$schema" >> .env
-echo "export id=\\$id" >> .env
+echo 'export schema=\$schema' >> .env
+echo 'export id=\$id' >> .env
 
 echo "Environment file .env created with the necessary values"
 cat .env
