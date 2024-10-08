@@ -12,7 +12,7 @@
       "value": "global"
     },
     "botEndpoint": {
-      "value": "https://${APP_DISPLAY_NAME}-appservice.azurewebsites.net/api/messages"
+      "value": "https://${APP_WEBSITE_NAME}.azurewebsites.net/api/messages"
     },
     "appType": {
       "value": "${APP_TYPE}"

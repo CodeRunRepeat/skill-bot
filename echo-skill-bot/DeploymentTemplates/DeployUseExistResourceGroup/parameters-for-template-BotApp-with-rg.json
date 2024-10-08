@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "appServiceName": {
-      "value": "${APP_DISPLAY_NAME}-appservice"
+      "value": "${APP_WEBSITE_NAME}"
     },
     "existingAppServicePlanName": {
       "value": ""
@@ -12,7 +12,7 @@
       "value": ""
     },
     "newAppServicePlanName": {
-      "value": "${APP_DISPLAY_NAME}-appservice-plan"
+      "value": "${APP_WEBSITE_NAME}-plan"
     },
     "newAppServicePlanLocation": {
       "value": "${LOCATION}"

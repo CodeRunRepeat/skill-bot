@@ -9,17 +9,22 @@ warning () {
     echo -e "\e[93m$1\e[0m" 
 }
 
+function guid() {
+    echo $(cat /proc/sys/kernel/random/uuid | cut -c-8)
+}
+
 # -------------------------------- Parameters --------------------------------
 tenant_id=$(az account show --query tenantId -o tsv)
 subscription_id=$(az account show --query id -o tsv)
 resource_group_name="skill-bot-rg"
 location="westeurope"
 app_type="MultiTenant" # or "SingleTenant"
-app_display_name="skill-bot-sprintwave"
-bot_display_name="skill-bot-sprintwave"
+
+guid=$(guid)
+app_display_name="skill-bot-$guid"
+bot_display_name="skill-bot-$guid"
 
 echo "Using the following parameters:"
-
 echo "tenant_id=$tenant_id"
 
 echo "resource_group_name=$resource_group_name"
@@ -52,10 +57,6 @@ if [ $continue != "Y" ] && [ $continue != "y" ]; then
     exit 1
 fi
 
-# Optional -- for when the bot skill consumer is in a different tenant
-#consumer_tenant_id="f****************d6dc"
-#consumer_app_id="c0***************220d1a0"
-
 # ----------------------------------------------------------------------------
 # Create the resource group
 resource_group_id=$(az group create --name $resource_group_name --location $location --query id -o tsv)
@@ -83,16 +84,6 @@ response=$(az ad app credential reset --id $app_id)
 client_secret=$(echo $response | jq -r '.password')
 echo "Client secret created: $client_secret"
 
-# if consumer_tenant_id and consumer_app_id are set, create federated credentials for the app
-if [ -n "$consumer_tenant_id" ] && [ -n "$consumer_app_id" ]; then
-    echo "Creating federated credentials for the app"
-    parameters="{\"name\":\"federated-"$consumer_tenant_id"\",\"subject\":\""$consumer_app_id"\",\"issuer\":\"https://login.microsoftonline.com/"$consumer_tenant_id"/v2.0\",\"audiences\":[\"api://AzureADTokenExchange\"]}"
-    az ad app federated-credential create --id $app_id --parameters $parameters
-else
-    echo "No consumer tenant or app specified, skipping federated credentials creation"
-    consumer_app_id=$app_id
-fi
-
 # ----------------------------------------------------------------------------
 # Create the bot registration (probably not needed as included in the deployment template below)
 if [ $app_type == "MultiTenant" ]; then
@@ -111,7 +102,6 @@ echo "export RESOURCE_GROUP_NAME=$resource_group_name" > .env
 echo "export LOCATION=$location" >> .env
 echo "export RESOURCE_GROUP_ID=$resource_group_id" >> .env
 echo "export APP_ID=$app_id" >> .env
-echo "export CONSUMER_APP_ID=$consumer_app_id" >> .env
 echo "export APP_TYPE=$app_type" >> .env
 echo "export APP_DISPLAY_NAME=$app_display_name" >> .env
 echo "export APP_WEBSITE_NAME=$app_website_name" >> .env
