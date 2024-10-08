@@ -1,0 +1,10 @@
+<environmentvariabledefinition schemaname="Default_copilot.skill.EchoSkillbot.AppId">
+  <displayname default="[Copilot] Echo Skill bot msAppId">
+    <label description="[Copilot] Echo Skill bot msAppId" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

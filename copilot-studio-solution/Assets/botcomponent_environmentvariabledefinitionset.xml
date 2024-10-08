@@ -1,0 +1,8 @@
+<botcomponent_environmentvariabledefinitionset>
+  <botcomponent_environmentvariabledefinition botcomponentid.schemaname="Default_copilot.skill.EchoSkillbot" environmentvariabledefinitionid.schemaname="Default_copilot.skill.EchoSkillbot.AppEndpoint">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_environmentvariabledefinition>
+  <botcomponent_environmentvariabledefinition botcomponentid.schemaname="Default_copilot.skill.EchoSkillbot" environmentvariabledefinitionid.schemaname="Default_copilot.skill.EchoSkillbot.AppId">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_environmentvariabledefinition>
+</botcomponent_environmentvariabledefinitionset>

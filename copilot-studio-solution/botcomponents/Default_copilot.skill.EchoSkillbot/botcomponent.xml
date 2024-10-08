@@ -1,0 +1,11 @@
+<botcomponent schemaname="Default_copilot.skill.EchoSkillbot">
+  <componenttype>13</componenttype>
+  <description>This is a sample echo skill</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Echo Skill bot</name>
+  <parentbotid>
+    <schemaname>Default_copilot</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

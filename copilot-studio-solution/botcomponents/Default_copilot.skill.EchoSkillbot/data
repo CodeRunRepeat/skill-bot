@@ -1,0 +1,13 @@
+kind: SkillDefinition
+appId:
+  schemaName: Default_copilot.skill.EchoSkillbot.AppId
+
+appEndpoint:
+  schemaName: Default_copilot.skill.EchoSkillbot.AppEndpoint
+
+manifestVersion: 1.0
+privacyPolicy: https://echoskillbot.contoso.com/privacy.html
+actions:
+  - activityType: message
+    actionId: echo
+    title: Echo back the text that was sent to the bot.

@@ -1,0 +1,32 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Greeting
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Good afternoon
+      - Good morning
+      - Hello
+      - Hey
+      - Hi
+
+  actions:
+    - kind: SendActivity
+      id: sendMessage_abmysR
+      activity:
+        text:
+          - Hello, how can I help you today?
+        speak:
+          - Hello, <break strength="medium" /> how can I help?
+
+    - kind: InvokeSkillAction
+      id: invokeSkillAction_dKRXdz
+      input: {}
+      output: {}
+      skillId: Default_copilot.skill.EchoSkillbot
+      actionId: echo
+
+    - kind: CancelAllDialogs
+      id: cancelAllDialogs_01At22

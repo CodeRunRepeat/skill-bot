@@ -1,0 +1,9 @@
+{
+  "environmentvariablevalues": {
+    "environmentvariablevalue": {
+      "@environmentvariablevalueid": "e1c04b40-4685-ef11-ac20-000d3a5a64e3",
+      "iscustomizable": "1",
+      "value": "http://<app-service-name>.azurewebsites.net/api/messages"
+    }
+  }
+}
