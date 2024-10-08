@@ -53,8 +53,8 @@ if [ $continue != "Y" ] && [ $continue != "y" ]; then
 fi
 
 # Optional -- for when the bot skill consumer is in a different tenant
-#consumer_tenant_id="f3f21bca-7b2f-40f2-a2fc-dddd9be1d6dc"
-#consumer_app_id="c01e603c-cace-41f9-a6d3-475b8220d1a0"
+#consumer_tenant_id="f****************d6dc"
+#consumer_app_id="c0***************220d1a0"
 
 # ----------------------------------------------------------------------------
 # Create the resource group
