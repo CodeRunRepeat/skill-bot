@@ -60,6 +60,17 @@ for more details.
 
 1. Register the bot with Copilot Studio using the manifest file.
 
+### Updating code
+
+If you have made changes to the bot code and want to update the bot, you can use the `deploy-bot-code.sh` script.
+First, update the `resource_group_name` and `app_website_name` parameters in the script to match the values used during setup.
+Then run the script:
+
+```bash
+chmod +x deploy-bot-code.sh
+./deploy-bot-code.sh
+```
+
 ## Parameters
 
 The following parameters can be adjusted in the `setup-bot.sh` script:
