@@ -60,6 +60,11 @@ for more details.
 
 1. Register the bot with Copilot Studio using the manifest file.
 
+1. Build your Copilot Studio copilot and add the skill to it; test the skill and publish it. If you want to
+see it embedded in a custom web site, configure the Custom Website channel, and use the provided
+iframe code to embed the skill in your web site. Alternatively you can set the iframe URL in
+`./custom-web-app-host/static-app.html` and host it on your own web server.
+
 ### Updating code
 
 If you have made changes to the bot code and want to update the bot, you can use the `deploy-bot-code.sh` script.
