@@ -3,6 +3,7 @@
 
 # Sample specific files
 .env
+.env.*
 *.replaced.json
 appsettings.json
 *.zip

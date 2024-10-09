@@ -63,8 +63,8 @@ for more details.
 ### Updating code
 
 If you have made changes to the bot code and want to update the bot, you can use the `deploy-bot-code.sh` script.
-First, update the `resource_group_name` and `app_website_name` parameters in the script to match the values used during setup.
-Then run the script:
+Make sure that you have the .env file that was generated during deployment in the same directory as the script,
+then run the script.
 
 ```bash
 chmod +x deploy-bot-code.sh

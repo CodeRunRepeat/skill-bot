@@ -2,8 +2,16 @@
 #az account set --subscription <<subscription>>
 #az account show
 
-resource_group_name="skill-bot-rg"
-app_website_name="skill-bot-sprintwave-test-appservice"
+# Load values from .env into variables
+source .env
+resource_group_name=${RESOURCE_GROUP_NAME}
+app_website_name=${APP_WEBSITE_NAME}
+
+# Update the appsettings.json file
+envsubst < ./appsettings.template.json > ./appsettings.json
+# Update the manifest file
+envsubst < ./wwwroot/manifest/echoskillbot-manifest-1.0.template.json > ./wwwroot/manifest/echoskillbot-manifest-1.0.json
+echo "appsettings.json and manifest files updated with the necessary values"
 
 dotnet build --configuration Release --os win
 
