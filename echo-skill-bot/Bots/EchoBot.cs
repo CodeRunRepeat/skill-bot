@@ -24,7 +24,12 @@ namespace Microsoft.BotBuilderSamples.EchoSkillBot.Bots
             }
             else
             {
-                var messageText = FormatMessageActivity(turnContext.Activity) + "\r\n" + FormatTurnContext(turnContext);
+                var messageText = string.Join("\r\n",
+                    FormatMessageActivity(turnContext.Activity),
+                    FormatActivity(turnContext.Activity),
+                    FormatConversation(turnContext.Activity.Conversation),
+                    FormatTurnContext(turnContext));
+
                 await turnContext.SendActivityAsync(MessageFactory.Text(messageText, messageText, InputHints.IgnoringInput), cancellationToken);
                 messageText = "Say \"end\" or \"stop\" and I'll end the conversation and back to the parent.";
                 await turnContext.SendActivityAsync(MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput), cancellationToken);
@@ -51,6 +56,16 @@ namespace Microsoft.BotBuilderSamples.EchoSkillBot.Bots
         private string FormatMessageActivity(IMessageActivity activity)
         {
             return $"---------- Message ----------\r\nFrom - {activity.From.Name}\r\nMessage - {activity.Text}\r\nLocale - {activity.Locale}\r\nSpeak - {activity.Speak}\r\nInputHint - {activity.InputHint}\r\nSummary - {activity.Summary}";
+        }
+
+        private string FormatActivity(IActivity activity)
+        {
+            return $"---------- Activity ----------\r\nType - {activity.Type}\r\nId - {activity.Id}\r\nTimestamp - {activity.Timestamp}\r\nLocalTimestamp - {activity.LocalTimestamp}\r\nServiceUrl - {activity.ServiceUrl}\r\nChannelId - {activity.ChannelId}\r\nRecipient - {activity.Recipient.Name}\r\nFrom - {activity.From.Name}";
+        }
+
+        private string FormatConversation(ConversationAccount conversation)
+        {
+            return $"---------- Conversation ----------\r\nIsGroup - {conversation.IsGroup}\r\nConversationType - {conversation.ConversationType}\r\nId - {conversation.Id}\r\nName - {conversation.Name}\r\nAadObjectId - {conversation.AadObjectId}\r\nRole - {conversation.Role}\r\nTenantId - {conversation.TenantId}";
         }
     }
 }
